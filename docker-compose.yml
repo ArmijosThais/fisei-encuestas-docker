@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./encuestas-server
+      dockerfile: Dockerfile
+    volumes:
+      - ./encuestas-server/src/dbConfig.js:/app/src/dbConfig.js
+    ports:
+      - "4000:4000"
+  frontend:
+    build:
+      context: ./encuestas-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
